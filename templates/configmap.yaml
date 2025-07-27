@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "dev-consul.fullname" . }}
+  labels:
+    {{- include "dev-consul.labels" . | nindent 4 }}
+data:
+  config.json: |
+    {
+      "datacenter": {{ .Values.config.datacenter | quote }},
+      "data_dir": {{ .Values.config.data_dir | quote }},
+      "client_addr": {{ .Values.config.client_addr | quote }},
+      "ui": {{ .Values.config.ui }},
+      "server": {{ .Values.config.server }},
+      "bootstrap_expect": {{ .Values.config.bootstrap_expect }},
+      "disable_update_check": {{ .Values.config.disable_update_check }}
+    }
